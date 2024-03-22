@@ -1,0 +1,228 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vehicle Registrations Heat Map by Fuel Type - 2022</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+    <div id="map" style="width: 100%; height: 600px;"></div>
+    <script>
+        var data = [
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [8700, 2000, 65800, 5100, 903600, 59900, 22000, 5400, 5900, 168000, 60100, 19800, 5900, 66900, 17700, 6200, 7600, 7600, 5900, 5000, 46100, 49400, 33100, 24300, 2400, 17900, 3300, 4600, 32900, 7000, 87000, 7100, 84700, 45600, 600, 34100, 16300, 47000, 47400, 4300, 13500, 1200, 22000, 149000, 28000, 5300, 56600, 104100, 1900, 15700, 800],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Electric (EV)',
+                visible: true  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [4400, 700, 20400, 2500, 361100, 24000, 13100, 2800, 3200, 45800, 18100, 5600, 3500, 25700, 10100, 4900, 4300, 4400, 2900, 5700, 22900, 30500, 24300, 11900, 1600, 10400, 1700, 2900, 8800, 4800, 26800, 3900, 59800, 18800, 600, 17800, 11500, 22500, 25400, 3400, 6700, 1000, 8900, 42800, 10200, 4200, 21700, 31400, 1400, 10000, 600],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Plug-In Hybrid Electric (PHEV)',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [50800, 9000, 150800, 30600, 1514000, 131800, 64500, 19500, 17200, 338700, 147200, 32600, 36500, 244100, 100900, 48600, 43500, 55800, 31400, 28900, 146200, 158600, 122800, 105300, 22300, 95100, 17100, 27300, 59100, 31100, 142600, 37600, 259600, 175300, 6600, 165700, 47000, 138900, 199600, 18600, 66800, 10300, 94000, 361800, 69300, 17800, 198400, 270200, 18300, 105200, 6900],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Hybrid Electric (HEV)',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [48100, 8700, 61200, 33300, 183900, 62100, 10100, 4700, 400, 150900, 82500, 3100, 40300, 55400, 49100, 37000, 25000, 32300, 60100, 10500, 30300, 19500, 62800, 46900, 31600, 61300, 33200, 25600, 24700, 12900, 25900, 28600, 48400, 71300, 18300, 63400, 60200, 50200, 68100, 2800, 38300, 20000, 45700, 420800, 61500, 6400, 40000, 67500, 15600, 46500, 19100],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Biodiesel',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [449800, 48600, 446000, 283900, 1338000, 346400, 139800, 66200, 17800, 1137200, 745000, 39900, 133300, 807900, 587100, 338900, 260100, 363800, 397500, 109100, 326900, 297000, 905700, 531500, 302000, 576700, 98000, 201800, 130700, 95400, 404200, 155900, 633100, 675300, 93500, 868500, 380800, 186300, 698500, 43100, 411400, 105700, 519400, 2398800, 189900, 40000, 496200, 348300, 127500, 549700, 58600],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Ethanol/Flex (E85)',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [100, 0, 600, 200, 10300, 300, 200, 0, 100, 400, 300, 0, 100, 300, 300, 100, 200, 300, 100, 0, 300, 200, 300, 100, 100, 1200, 0, 100, 200, 100, 300, 100, 400, 300, 0, 700, 2000, 100, 500, 0, 100, 0, 100, 1400, 2300, 0, 300, 100, 100, 300, 0],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Compressed Natural Gas (CNG)',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [100, 0, 800, 0, 1500, 100, 0, 0, 0, 100, 300, 0, 100, 0, 0, 0, 100, 0, 0, 0, 0, 0, 100, 0, 0, 100, 0, 0, 100, 0, 0, 100, 100, 100, 0, 100, 300, 100, 100, 0, 100, 0, 100, 1400, 600, 0, 0, 100, 0, 0, 0],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Propane',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [0, 0, 0, 0, 14900, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Hydrogen',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Methanol',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [4077100, 457100, 5476100, 2229500, 31059000, 4506300, 2636300, 795400, 272200, 15846500, 8204500, 960000, 1545500, 8606400, 5116800, 2521300, 2159200, 3368800, 3159000, 1028100, 4373900, 4777600, 7071800, 4180500, 2275400, 4444600, 765400, 1576900, 2157700, 1180700, 6339500, 1584500, 9987400, 7700300, 614300, 8868300, 3538100, 3065400, 8888900, 782500, 4254700, 739400, 5536100, 21065800, 2454700, 501500, 6643300, 5650700, 1267500, 4577400, 483000],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Gasoline',
+                visible: false  // Correctly handle boolean values
+            },
+            
+            {
+                type: 'choropleth',
+                locationmode: 'USA-states',
+                locations: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                z: [126100, 30500, 198700, 89700, 725300, 206800, 44100, 14500, 2000, 343500, 205900, 15500, 136000, 171300, 153500, 103000, 87000, 115800, 115400, 26800, 88400, 59300, 175400, 127300, 75400, 176200, 69900, 75100, 85200, 29400, 85500, 88000, 152000, 209600, 43800, 197000, 147500, 216100, 191700, 11200, 107600, 53000, 157700, 771000, 155000, 14700, 153700, 277400, 45700, 144500, 61200],
+                text: ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "DC", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"],
+                autocolorscale: true,
+                name: 'Diesel',
+                visible: false  // Correctly handle boolean values
+            }
+            
+        ];
+
+        var layout = {
+            title: '2022 Light-Duty Vehicle Registrations by State and Fuel Type',
+            geo: {
+                scope: 'usa',
+                countrycolor: 'rgb(255, 255, 255)',
+                showland: true,
+                landcolor: 'rgb(217, 217, 217)',
+                showlakes: true,
+                lakecolor: 'rgb(255, 255, 255)',
+                subunitcolor: 'rgb(255, 255, 255)',
+                lonaxis: {},
+                lataxis: {}
+            },
+            updatemenus: [{
+                x: 0.1,
+                y: 0,
+                yanchor: 'top',
+                buttons: [
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [true,false,false,false,false,false,false,false,false,false,false]}],
+                        label: 'Electric (EV)'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,true,false,false,false,false,false,false,false,false,false]}],
+                        label: 'Plug-In Hybrid Electric (PHEV)'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,true,false,false,false,false,false,false,false,false]}],
+                        label: 'Hybrid Electric (HEV)'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,true,false,false,false,false,false,false,false]}],
+                        label: 'Biodiesel'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,false,true,false,false,false,false,false,false]}],
+                        label: 'Ethanol/Flex (E85)'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,false,false,true,false,false,false,false,false]}],
+                        label: 'Compressed Natural Gas (CNG)'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,false,false,false,true,false,false,false,false]}],
+                        label: 'Propane'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,false,false,false,false,true,false,false,false]}],
+                        label: 'Hydrogen'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,false,false,false,false,false,true,false,false]}],
+                        label: 'Methanol'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,false,false,false,false,false,false,true,false]}],
+                        label: 'Gasoline'
+                    },
+                    
+                    {
+                        method: 'update',
+                        args: [{'visible': [false,false,false,false,false,false,false,false,false,false,true]}],
+                        label: 'Diesel'
+                    }
+                    
+                ]
+            }]
+        };
+
+        Plotly.newPlot("map", data, layout, {showLink: false});
+    </script>
+</body>
+</html>
